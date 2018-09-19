@@ -2,7 +2,7 @@
     "name": "geo6/upload-geojson",
     "description": "",
     "type": "project",
-    "license": "",
+    "license": "GPL-3.0-or-later",
     "config": {
         "sort-packages": true
     },
