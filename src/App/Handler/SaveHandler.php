@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use Blast\BaseUrl\BaseUrlMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -33,6 +34,7 @@ class SaveHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        $basePath = $request->getAttribute(BaseUrlMiddleware::BASE_PATH);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         $method = $request->getMethod();
@@ -82,7 +84,12 @@ class SaveHandler implements RequestHandlerInterface
 
             return new HtmlResponse($this->template->render('app::save', $data));
         } else {
-            return new RedirectResponse($this->router->generateUri('home'));
+            $redirect = $this->router->generateUri('home');
+            if ($basePath !== $redirect) {
+                $redirect = $basePath.$redirect;
+            }
+
+            return new RedirectResponse($redirect);
         }
     }
 }
