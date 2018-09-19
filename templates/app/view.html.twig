@@ -1,0 +1,61 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}View{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="">
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('js/view.min.js') }}"></script>
+<script>
+    window.app.files = [];
+    window.app.warnings = [];
+{% for i, file in files %}
+    window.app.files[{{ i }}] = {{ file.content | raw }};
+    window.app.warnings[{{ i }}] = {{ file.warnings | json_encode | raw }};
+{% endfor %}
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>View</h1>
+<hr>
+
+<form action="{{ path('save') }}" method="POST" autocomplete="off">
+<div class="row">
+    {% for i, file in files %}
+    <div class="col-md-6">
+        <div class="card text-white bg-{{ file.success ? 'success' : 'warning' }} mb-4" data-success="{{ file.success ? 1 : 0 }}">
+            <div class="card-header">
+                <div class="form-group form-check mb-0">
+                    {% if not file.success %}
+                    <span class="float-right" data-toggle="tooltip" style="cursor: help;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    {% endif %}
+
+                    <input type="checkbox" class="form-check-input" name="files[]" id="input-{{ i }}" value="{{ file.filename }}"{{ file.success ? ' checked' }}>
+                    <label class="form-check-label strong" for="input-{{ i }}">
+                        {{ file.filename }}
+                    </label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="map" id="map-{{ i }}" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<hr>
+
+<div class="text-center mb-3">
+    <button type="submit" class="btn btn-primary" id="btn-save">
+        <i class="far fa-save"></i>
+        Save <span id="count-files"></span> <strong>selected</strong> file(s)
+    </button>
+</div>
+</form>
+
+{% endblock %}

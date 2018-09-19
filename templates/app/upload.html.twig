@@ -1,0 +1,42 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Upload{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('js/upload.min.js') }}"></script>
+<script>
+    window.app.api = "{{ path('api.upload') }}";
+    window.app.next = "{{ path('validate') }}";
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>Upload GeoJSON file(s)</h1>
+<hr>
+
+<p>
+    This applications allows you to upload GeoJSON files on the server.<br>
+    Your file(s) must be compatible with <a href="https://tools.ietf.org/html/rfc7946" target="_blank">the
+        GeoJSON specification (RFC 7946)</a> and will be validated before being saved in the specific folder.
+</p>
+<hr>
+
+<form autocomplete="off">
+    <span class="btn btn-primary" id="btn-upload-browse">
+        <i class="far fa-file-code"></i>
+        Select file(s)
+    </span>
+    <button type="button" class="btn btn-outline-primary" id="btn-upload-upload" disabled>
+        <i class="fas fa-upload"></i>
+        Upload file(s)
+    </button>
+</form>
+<hr>
+
+<div class="progress">
+    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<ul class="mt-3" id="upload-list"></ul>
+
+{% endblock %}

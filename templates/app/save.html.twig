@@ -1,0 +1,27 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Save{% endblock %}
+
+{% block content %}
+<h1>Save</h1>
+<hr>
+
+<div class="alert alert-success">
+    The following files are now available in <samp>{{ directory }}</samp> folder :
+    <ol class="mt-3">
+        {% for file in files %}
+        <li>{{ file }}</li>
+        {% endfor %}
+    </ol>
+</div>
+
+<div class="alert alert-warning">
+    The following files are <strong>not</strong> uploaded (and are deleted from the temporary folder) :
+    <ol class="mt-3">
+        {% for file in skipped %}
+        <li>{{ file }}</li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% endblock %}

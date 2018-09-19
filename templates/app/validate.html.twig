@@ -1,0 +1,63 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Validate{% endblock %}
+
+{% block content %}
+<h1>Validation</h1>
+<hr>
+
+<p>You uploaded {{ count }} file(s).</p>
+
+{% if success | length > 0 %}
+<div class="alert alert-success">
+    <p>The following files are valid GeoJSON files.</p>
+    <ol>
+        {% for file in success %}
+        <li>{{ file }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
+
+{% if warning | length > 0 %}
+<div class="alert alert-warning">
+    <p>
+        The following files are valid GeoJSON files but there are some warnings you should check.
+    </p>
+    <ol>
+        {% for file, warnings in warning %}
+        <li>
+            {{ file }} :
+            <ul>
+                {% for warning in warnings %}
+                <li><strong>{{ warning | nl2br }}</strong></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
+
+{% if error | length > 0 %}
+<div class="alert alert-danger">
+    <p>
+        The following files are <strong>not</strong> valid GeoJSON files.<br>
+        Those files will not be uploaded on the server.
+    </p>
+    <ol>
+        {% for file, error in error %}
+        <li>{{ file }} : <strong>{{ error | nl2br }}</strong></li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
+
+<div class="text-center mb-3">
+    <a href="{{ path('view') }}" class="btn btn-primary">
+        Go to next step
+        <i class="fas fa-arrow-circle-right"></i>
+    </a>
+</div>
+
+{% endblock %}
