@@ -43,7 +43,7 @@ class SaveHandler implements RequestHandlerInterface
         if ($method === 'POST' && isset($params['files'])) {
             $session->set('POST:files', $params['files']);
 
-            return new RedirectResponse($basePath.$request->getUri(), 303);
+            return new RedirectResponse($basePath.$this->router->generateUri('save'), 303);
         }
 
         $tempDirectory = $session->get('tempDirectory');
