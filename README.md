@@ -1,5 +1,6 @@
 # Upload GeoJSON
 
+[![Build Status](https://travis-ci.org/geo6/upload-geojson.svg?branch=master)](https://travis-ci.org/geo6/upload-geojson)
 [![Latest Stable Version](https://poser.pugx.org/geo6/upload-geojson/v/stable)](https://packagist.org/packages/geo6/upload-geojson)
 [![Total Downloads](https://poser.pugx.org/geo6/upload-geojson/downloads)](https://packagist.org/packages/geo6/upload-geojson)
 [![Monthly Downloads](https://poser.pugx.org/geo6/upload-geojson/d/monthly.png)](https://packagist.org/packages/geo6/upload-geojson)
