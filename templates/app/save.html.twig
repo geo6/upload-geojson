@@ -9,7 +9,7 @@
 <div class="alert alert-success">
     The following files are now available in <samp>{{ directory }}</samp> folder :
     <ol class="mt-3">
-        {% for file in files %}
+        {% for file in upload %}
         <li>{{ file }}</li>
         {% endfor %}
     </ol>
@@ -18,7 +18,7 @@
 <div class="alert alert-warning">
     The following files are <strong>not</strong> uploaded (and are deleted from the temporary folder) :
     <ol class="mt-3">
-        {% for file in skipped %}
+        {% for file in skip %}
         <li>{{ file }}</li>
         {% endfor %}
     </ol>

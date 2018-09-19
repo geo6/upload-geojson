@@ -35,47 +35,54 @@ class SaveHandler implements RequestHandlerInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        $tempDirectory = $session->get('tempDirectory');
-        if (is_null($tempDirectory)) {
-            return new RedirectResponse($this->router->generateUri('home'));
-        }
-
+        $method = $request->getMethod();
         $params = $request->getParsedBody();
 
-        if (isset($params['files'])) {
-            $directory = 'data/upload/'.date('Ymd-His');
+        if ($method === 'POST' && isset($params['files'])) {
+            $session->set('POST:files', $params['files']);
 
+            return new RedirectResponse($request->getUri(), 303);
+        }
+
+        $tempDirectory = $session->get('tempDirectory');
+        $files = $session->get('POST:files');
+
+        if (file_exists($tempDirectory) && is_dir($tempDirectory)) {
+            $uploadedFiles = [];
+            $skippedFiles = [];
+
+            $directory = 'data/upload/'.date('Ymd-His');
             if (!file_exists($directory) || !is_dir($directory)) {
                 mkdir($directory, 0777, true);
             }
 
-            $files = [];
-            foreach ($params['files'] as $filename) {
+            foreach ($files as $filename) {
                 if (file_exists($tempDirectory.'/'.$filename)) {
-                    $files[] = $filename;
+                    $uploadedFiles[] = $filename;
 
                     rename($tempDirectory.'/'.$filename, $directory.'/'.$filename);
                 }
             }
 
-            $skipped = [];
             $glob = glob($tempDirectory.'/*.*');
             foreach ($glob as $file) {
-                $skipped[] = basename($file);
+                $skippedFiles[] = basename($file);
 
                 unlink($file);
             }
             rmdir($tempDirectory);
 
-            $session->unset('tempDirectory');
+            $session->unset('POST:files');
 
             $data = [
                 'directory' => basename($directory),
-                'files'     => $files,
-                'skipped'   => $skipped,
+                'upload'    => $uploadedFiles,
+                'skip'      => $skippedFiles,
             ];
 
             return new HtmlResponse($this->template->render('app::save', $data));
+        } else {
+            return new RedirectResponse($this->router->generateUri('home'));
         }
     }
 }

@@ -36,7 +36,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/', App\Handler\UploadHandler::class, 'home');
     $app->get('/validate', App\Handler\ValidateHandler::class, 'validate');
     $app->get('/view', App\Handler\ViewHandler::class, 'view');
-    $app->post('/save', App\Handler\SaveHandler::class, 'save');
+    $app->route('/save', App\Handler\SaveHandler::class, ['GET', 'POST'], 'save');
 
     $app->get('/api/ping', App\Handler\API\PingHandler::class, 'api.ping');
     $app->route('/api/upload', App\Handler\API\UploadHandler::class, ['GET', 'POST'], 'api.upload');
