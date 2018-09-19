@@ -11,8 +11,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Router;
-use Zend\Expressive\Template;
 use Zend\Expressive\Session\SessionMiddleware;
+use Zend\Expressive\Template;
 
 class ValidateHandler implements RequestHandlerInterface
 {
@@ -27,8 +27,8 @@ class ValidateHandler implements RequestHandlerInterface
         Template\TemplateRendererInterface $template = null,
         string $containerName
     ) {
-        $this->router        = $router;
-        $this->template      = $template;
+        $this->router = $router;
+        $this->template = $template;
         $this->containerName = $containerName;
     }
 
@@ -81,8 +81,8 @@ class ValidateHandler implements RequestHandlerInterface
                 }
 
                 $files[] = [
-                    'path' => $file,
-                    'success' => !isset($warning[$fname]),
+                    'path'     => $file,
+                    'success'  => !isset($warning[$fname]),
                     'warnings' => $warning[$fname] ?? [],
                 ];
             } catch (Exception $e) {
@@ -94,8 +94,8 @@ class ValidateHandler implements RequestHandlerInterface
         $session->set('files', $files);
 
         $data = [
-            'count' => count($glob),
-            'error' => $error,
+            'count'   => count($glob),
+            'error'   => $error,
             'warning' => $warning,
             'success' => $success,
         ];

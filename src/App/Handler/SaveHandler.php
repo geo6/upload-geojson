@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Validator\GeoJSON as GeoJSONValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router;
-use Zend\Expressive\Template;
 use Zend\Expressive\Session\SessionMiddleware;
+use Zend\Expressive\Template;
 
 class SaveHandler implements RequestHandlerInterface
 {
@@ -27,8 +26,8 @@ class SaveHandler implements RequestHandlerInterface
         Template\TemplateRendererInterface $template = null,
         string $containerName
     ) {
-        $this->router        = $router;
-        $this->template      = $template;
+        $this->router = $router;
+        $this->template = $template;
         $this->containerName = $containerName;
     }
 
@@ -72,8 +71,8 @@ class SaveHandler implements RequestHandlerInterface
 
             $data = [
                 'directory' => basename($directory),
-                'files' => $files,
-                'skipped' => $skipped,
+                'files'     => $files,
+                'skipped'   => $skipped,
             ];
 
             return new HtmlResponse($this->template->render('app::save', $data));

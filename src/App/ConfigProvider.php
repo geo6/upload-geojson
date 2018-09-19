@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App;
 
 /**
- * The configuration provider for the App module
+ * The configuration provider for the App module.
  *
  * @see https://docs.zendframework.com/zend-component-installer/
  */
 class ConfigProvider
 {
     /**
-     * Returns the configuration array
+     * Returns the configuration array.
      *
      * To add a bit of a structure, each section is defined in a separate
      * method which returns an array with its configuration.
-     *
      */
     public function __invoke() : array
     {
@@ -27,27 +26,27 @@ class ConfigProvider
     }
 
     /**
-     * Returns the container dependencies
+     * Returns the container dependencies.
      */
     public function getDependencies() : array
     {
         return [
             'invokables' => [
-                Handler\API\PingHandler::class => Handler\API\PingHandler::class,
-                Handler\API\SaveHandler::class => Handler\API\SaveHandler::class,
+                Handler\API\PingHandler::class   => Handler\API\PingHandler::class,
+                Handler\API\SaveHandler::class   => Handler\API\SaveHandler::class,
                 Handler\API\UploadHandler::class => Handler\API\UploadHandler::class,
             ],
             'factories'  => [
-                Handler\SaveHandler::class => Handler\SaveHandlerFactory::class,
-                Handler\UploadHandler::class => Handler\UploadHandlerFactory::class,
+                Handler\SaveHandler::class     => Handler\SaveHandlerFactory::class,
+                Handler\UploadHandler::class   => Handler\UploadHandlerFactory::class,
                 Handler\ValidateHandler::class => Handler\ValidateHandlerFactory::class,
-                Handler\ViewHandler::class => Handler\ViewHandlerFactory::class,
+                Handler\ViewHandler::class     => Handler\ViewHandlerFactory::class,
             ],
         ];
     }
 
     /**
-     * Returns the templates configuration
+     * Returns the templates configuration.
      */
     public function getTemplates() : array
     {
