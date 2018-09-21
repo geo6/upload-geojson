@@ -19,6 +19,11 @@
     Your file(s) must be compatible with <a href="https://tools.ietf.org/html/rfc7946" target="_blank">the
         GeoJSON specification (RFC 7946)</a> and will be validated before being saved in the specific folder.
 </p>
+{% if user is defined %}
+<p>
+    Your file(s) will be uploaded in <code>{{ user.roles | first }}</code> directory.
+</p>
+{% endif %}
 <hr>
 
 <form autocomplete="off">

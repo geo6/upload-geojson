@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Authentication\UserInterface;
 use Zend\Expressive\Router;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template;
@@ -51,12 +52,26 @@ class SaveHandler implements RequestHandlerInterface
 
         $tempDirectory = $session->get('tempDirectory');
         $files = $session->get('POST:files');
+        $user = $session->get(UserInterface::class);
 
         if (file_exists($tempDirectory) && is_dir($tempDirectory)) {
             $uploadedFiles = [];
             $skippedFiles = [];
 
-            $directory = 'data/upload/'.date('Ymd-His');
+            if (!is_null($user)) {
+                $role = $user['roles'][0];
+
+                $directory = sprintf(
+                    'data/upload/%s/%s',
+                    $role,
+                    date('Ymd-His')
+                );
+            } else {
+                $directory = sprintf(
+                    'data/upload/%s',
+                    date('Ymd-His')
+                );
+            }
             if (!file_exists($directory) || !is_dir($directory)) {
                 mkdir($directory, 0777, true);
             }
@@ -80,7 +95,7 @@ class SaveHandler implements RequestHandlerInterface
             $session->unset('POST:files');
 
             $data = [
-                'directory' => basename($directory),
+                'directory' => substr($directory, 12),
                 'upload'    => $uploadedFiles,
                 'skip'      => $skippedFiles,
             ];
