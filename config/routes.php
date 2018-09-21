@@ -35,9 +35,7 @@ use Zend\Expressive\MiddlewareFactory;
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $loadAuthenticationMiddleware = function ($middleware) use ($container) {
-        $authentication = isset($container->get('config')['authentication']['pdo']);
-
-        if ($authentication === true) {
+        if (isset($container->get('config')['authentication']['pdo'])) {
             return [
                 AuthenticationMiddleware::class,
                 $middleware,
