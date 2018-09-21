@@ -43,7 +43,10 @@ class SaveHandler implements RequestHandlerInterface
         if ($method === 'POST' && isset($params['files'])) {
             $session->set('POST:files', $params['files']);
 
-            return new RedirectResponse($basePath.$this->router->generateUri('save'), 303);
+            $redirect = ($basePath !== '/' ? $basePath : '');
+            $redirect .= $this->router->generateUri('save');
+
+            return new RedirectResponse($redirect, 303);
         }
 
         $tempDirectory = $session->get('tempDirectory');
@@ -84,10 +87,8 @@ class SaveHandler implements RequestHandlerInterface
 
             return new HtmlResponse($this->template->render('app::save', $data));
         } else {
-            $redirect = $this->router->generateUri('home');
-            if ($basePath !== $redirect) {
-                $redirect = $basePath.$redirect;
-            }
+            $redirect = ($basePath !== '/' ? $basePath : '');
+            $redirect .= $this->router->generateUri('home');
 
             return new RedirectResponse($redirect);
         }
