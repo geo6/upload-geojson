@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
+use Zend\Expressive\Authentication\AuthenticationMiddleware;
 use Zend\Expressive\MiddlewareFactory;
 
 /*
@@ -33,11 +34,30 @@ use Zend\Expressive\MiddlewareFactory;
  * );
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
-    $app->get('/', App\Handler\UploadHandler::class, 'home');
-    $app->get('/validate', App\Handler\ValidateHandler::class, 'validate');
-    $app->get('/view', App\Handler\ViewHandler::class, 'view');
-    $app->route('/save', App\Handler\SaveHandler::class, ['GET', 'POST'], 'save');
+    $loadAuthenticationMiddleware = function ($middleware) use ($container) {
+        $authentication = isset($container->get('config')['authentication']['pdo']);
+
+        if ($authentication === true) {
+            return [
+                AuthenticationMiddleware::class,
+                $middleware,
+            ];
+        }
+
+        return $middleware;
+    };
+
+    $app->get('/', $loadAuthenticationMiddleware(App\Handler\UploadHandler::class), 'home');
+    $app->get('/validate', $loadAuthenticationMiddleware(App\Handler\ValidateHandler::class), 'validate');
+    $app->get('/view', $loadAuthenticationMiddleware(App\Handler\ViewHandler::class), 'view');
+    $app->route('/save', $loadAuthenticationMiddleware(App\Handler\SaveHandler::class), ['GET', 'POST'], 'save');
 
     $app->get('/api/ping', App\Handler\API\PingHandler::class, 'api.ping');
     $app->route('/api/upload', App\Handler\API\UploadHandler::class, ['GET', 'POST'], 'api.upload');
+
+    $app->route('/login', [
+        App\Handler\LoginHandler::class,
+        Zend\Expressive\Authentication\AuthenticationMiddleware::class,
+    ], ['GET', 'POST'], 'login');
+    $app->get('/logout', $loadAuthenticationMiddleware(App\Handler\LoginHandler::class), 'logout');
 };

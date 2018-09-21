@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Middleware\UIMiddleware;
 use Blast\BaseUrl\BaseUrlMiddleware;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
@@ -71,6 +72,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - route-based authentication
     // - route-based validation
     // - etc.
+    $app->pipe(UIMiddleware::class);
 
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
