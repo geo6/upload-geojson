@@ -67,7 +67,7 @@
         ],
         "analyze": "phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
-        "clear-data-temp": "rm -r data/temp",
+        "clear-data-temp": "rm -r data/temp/*",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/",
