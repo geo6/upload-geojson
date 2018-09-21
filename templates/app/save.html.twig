@@ -6,6 +6,7 @@
 <h1>Save</h1>
 <hr>
 
+{% if upload is not empty %}
 <div class="alert alert-success">
     The following files are now available in <samp>{{ directory }}</samp> folder :
     <ol class="mt-3">
@@ -14,7 +15,9 @@
         {% endfor %}
     </ol>
 </div>
+{% endif %}
 
+{% if skip is not empty %}
 <div class="alert alert-warning">
     The following files are <strong>not</strong> uploaded (and are deleted from the temporary folder) :
     <ol class="mt-3">
@@ -23,5 +26,6 @@
         {% endfor %}
     </ol>
 </div>
+{% endif %}
 
 {% endblock %}
