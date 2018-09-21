@@ -34,6 +34,15 @@
                                 <i class="fas fa-user-circle"></i> {{ user.details.fullname }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="mx-4 text-muted">
+                                    <strong><i class="fas fa-users"></i> Role(s) :</strong>
+                                    <ul class="list-inline mt-1">
+                                    {% for role in user.roles %}
+                                        <li class="list-inline-item badge badge-light">{{ role }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="dropdown-divider"></div>
                                 <a href="{{ path('logout') }}" class="dropdown-item">
                                     <i class="fas fa-sign-out-alt"></i> Log out
                                 </a>
