@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "610967b2311e0df2002614b3f276e4f3",
+    "content-hash": "6f221b0a1452d86b15a303ff98cece33",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -999,16 +999,16 @@
         },
         {
             "name": "zendframework/zend-expressive-authentication",
-            "version": "0.5.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-authentication.git",
-                "reference": "486cb20dc81df864ee4706e8d191fc87ad0af91b"
+                "reference": "c85f7602dc607dbcb1950dd8809c0defc92040e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-authentication/zipball/486cb20dc81df864ee4706e8d191fc87ad0af91b",
-                "reference": "486cb20dc81df864ee4706e8d191fc87ad0af91b",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-authentication/zipball/c85f7602dc607dbcb1950dd8809c0defc92040e6",
+                "reference": "c85f7602dc607dbcb1950dd8809c0defc92040e6",
                 "shasum": ""
             },
             "require": {
@@ -1060,27 +1060,27 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-05-23T16:58:27+00:00"
+            "time": "2018-09-28T08:25:39+00:00"
         },
         {
             "name": "zendframework/zend-expressive-authentication-session",
-            "version": "0.5.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-authentication-session.git",
-                "reference": "de9665d6d61d6f168dc42ee8ccb32e4a1fd026a4"
+                "reference": "75b0f1abba01846c245aed17ecb81ebd12db7734"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-authentication-session/zipball/de9665d6d61d6f168dc42ee8ccb32e4a1fd026a4",
-                "reference": "de9665d6d61d6f168dc42ee8ccb32e4a1fd026a4",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-authentication-session/zipball/75b0f1abba01846c245aed17ecb81ebd12db7734",
+                "reference": "75b0f1abba01846c245aed17ecb81ebd12db7734",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1",
-                "zendframework/zend-expressive-authentication": "^0.5.0",
+                "zendframework/zend-expressive-authentication": "^1.0",
                 "zendframework/zend-expressive-session": "^1.0"
             },
             "require-dev": {
@@ -1090,7 +1090,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev",
+                    "dev-develop": "1.1.x-dev"
                 },
                 "zf": {
                     "config-provider": "Zend\\Expressive\\Authentication\\Session\\ConfigProvider"
@@ -1113,7 +1114,7 @@
                 "session",
                 "zf"
             ],
-            "time": "2018-06-18T21:35:45+00:00"
+            "time": "2018-09-27T19:27:16+00:00"
         },
         {
             "name": "zendframework/zend-expressive-fastroute",
