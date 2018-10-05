@@ -61,7 +61,9 @@
         {% if geojson.title is defined or geojson.description is defined %}
         <hr>
         <div>
+            {% if geojson.title is defined %}
             {{ geojson.title }}
+            {% endif %}
             {% if geojson.description is defined %}
             <div class="text-info small">{{ geojson.description }}</div>
             {% endif %}
