@@ -7,55 +7,80 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="{{ asset('/js/view.min.js') }}"></script>
 <script>
-    window.app.files = [];
-    window.app.warnings = [];
-{% for i, file in files %}
-    window.app.files[{{ i }}] = {{ file.content | raw }};
-    window.app.warnings[{{ i }}] = {{ file.warnings | json_encode | raw }};
-{% endfor %}
+    window.app = {
+        geojson: {{ geojson | json_encode() | raw }}
+    };
 </script>
+<script src="{{ asset('/js/view.min.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-<h1>View</h1>
-<hr>
+<h1>View &amp; Select : {{ current }} / {{ count }}</h1>
+<div class="progress mb-3" style="height: 3px;">
+    <div class="progress-bar" role="progressbar" style="width: {{ (current / count * 100) | round }}%" aria-valuenow="{{ (current / count * 100) | round }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
-<form action="{{ path('save') }}" method="POST" autocomplete="off">
 <div class="row">
-    {% for i, file in files %}
-    <div class="col-md-6">
-        <div class="card text-white bg-{{ file.success ? 'success' : 'warning' }} mb-4" data-success="{{ file.success ? 1 : 0 }}">
-            <div class="card-header">
-                <div class="form-group form-check mb-0">
-                    {% if not file.success %}
-                    <span class="float-right" data-toggle="tooltip" style="cursor: help;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                    {% endif %}
-
-                    <input type="checkbox" class="form-check-input" name="files[]" id="input-{{ i }}" value="{{ file.filename }}"{{ file.success ? ' checked' }}>
-                    <label class="form-check-label strong" for="input-{{ i }}">
-                        {{ file.filename }}
-                    </label>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="map" id="map-{{ i }}" style="height: 300px;"></div>
+    <div class="col-8">
+        <div id="map" style="min-height: 75vh;"></div>
+    </div>
+    <div class="col-4">
+        <div class="btn-toolbar justify-content-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ path('view', {i: current+1}) }}" class="btn btn-outline-secondary">
+                    <i class="far fa-times-circle"></i>
+                    Skip
+                </a>
+                <a href="{{ path('save', {i: current}) }}" class="btn btn-{{ warnings | length > 0 ? 'warning' : 'success' }}">
+                    <i class="far fa-check-circle"></i>
+                    Select
+                </a>
             </div>
         </div>
-    </div>
-    {% endfor %}
-</div>
-<hr>
+        <hr>
 
-<div class="text-center mb-3">
-    <button type="submit" class="btn btn-primary" id="btn-save">
-        <i class="far fa-save"></i>
-        Save <span id="count-files"></span> <strong>selected</strong> file(s)
-    </button>
+        <p class="h5">
+            <i class="far fa-file-code"></i>
+            {{ filename }}
+        </p>
+        {% if warnings | length > 0 %}
+        <div class="alert alert-warning small">
+            <strong>Warning :</strong>
+            <ul class="list-unstyled mb-0">
+                {% for warning in warnings %}
+                <li>{{ warning }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <hr>
+        <div class="text-center">
+            {{ filesize }} Ko &bull; {{ featuresCount }} feature(s)
+        </div>
+        {% if geojson.title is defined or geojson.description is defined %}
+        <hr>
+        <div>
+            {{ geojson.title }}
+            {% if geojson.description is defined %}
+            <div class="text-info small">{{ geojson.description }}</div>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% if geojson.legend is defined %}
+        <hr>
+        <strong>Legend</strong>
+        <ul class="list-unstyled">
+            {% for item in geojson.legend %}
+            <li>
+                <i class="fas fa-circle" style="color: {{ item.color }}"></i>
+                {{ item.text }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 </div>
-</form>
+
 
 {% endblock %}

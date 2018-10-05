@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use Blast\BaseUrl\BaseUrlMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template;
@@ -32,20 +34,38 @@ class ViewHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        $basePath = $request->getAttribute(BaseUrlMiddleware::BASE_PATH);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         $files = $session->get('files');
 
-        $data = [
-            'files' => [],
-        ];
-        foreach ($files as $file) {
-            $file['filename'] = basename($file['path']);
-            $file['content'] = json_encode(json_decode(file_get_contents($file['path'])));
-
-            $data['files'][] = $file;
+        $i = intval($request->getAttribute('i'));
+        if ($i <= 0) {
+            return new RedirectResponse($basePath.$this->router->generateUri('view', ['i' => 1]), 301);
+        } elseif ($i > count($files)) {
+            return new RedirectResponse($basePath.$this->router->generateUri('save'));
         }
 
-        return new HtmlResponse($this->template->render('app::view', $data));
+        if (!isset($files[$i - 1])) {
+            $redirect = ($basePath !== '/' ? $basePath : '');
+            $redirect .= $this->router->generateUri('home');
+
+            return new RedirectResponse($redirect);
+        } else {
+            $file = $files[$i - 1];
+            $json = json_decode(file_get_contents($file['path']));
+
+            $data = [
+                'count'         => count($files),
+                'current'       => $i,
+                'filename'      => basename($file['path']),
+                'filesize'      => round(filesize($file['path']) / 1024),
+                'featuresCount' => isset($json->features) ? count($json->features) : 1,
+                'geojson'       => $json,
+                'warnings'      => $file['warnings'],
+            ];
+
+            return new HtmlResponse($this->template->render('app::view', $data));
+        }
     }
 }
