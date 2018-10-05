@@ -87,8 +87,16 @@ class ValidateHandler implements RequestHandlerInterface
                 ];
             } catch (Exception $e) {
                 $error[$fname] = $e->getMessage();
+
+                unlink($file);
+
                 continue;
             }
+        }
+
+        $glob = glob($directory.'/*.*');
+        if (count($glob) === 0) {
+            rmdir($directory);
         }
 
         $session->set('files', $files);
