@@ -47,8 +47,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
     $app->get('/', $loadAuthenticationMiddleware(App\Handler\UploadHandler::class), 'home');
     $app->get('/validate', $loadAuthenticationMiddleware(App\Handler\ValidateHandler::class), 'validate');
-    $app->get('/view', $loadAuthenticationMiddleware(App\Handler\ViewHandler::class), 'view');
-    $app->route('/save', $loadAuthenticationMiddleware(App\Handler\SaveHandler::class), ['GET', 'POST'], 'save');
+    $app->get('/view[/{i:\d+}]', $loadAuthenticationMiddleware(App\Handler\ViewHandler::class), 'view');
+    $app->get('/save[/{i:\d+}]', $loadAuthenticationMiddleware(App\Handler\SaveHandler::class), 'save');
 
     $app->get('/api/ping', App\Handler\API\PingHandler::class, 'api.ping');
     $app->route('/api/upload', App\Handler\API\UploadHandler::class, ['GET', 'POST'], 'api.upload');

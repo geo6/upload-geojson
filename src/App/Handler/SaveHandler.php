@@ -38,26 +38,22 @@ class SaveHandler implements RequestHandlerInterface
         $basePath = $request->getAttribute(BaseUrlMiddleware::BASE_PATH);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        $method = $request->getMethod();
-        $params = $request->getParsedBody();
+        $i = intval($request->getAttribute('i'));
 
-        if ($method === 'POST' && isset($params['files'])) {
-            $session->set('POST:files', $params['files']);
-
-            $redirect = ($basePath !== '/' ? $basePath : '');
-            $redirect .= $this->router->generateUri('save');
-
-            return new RedirectResponse($redirect, 303);
-        }
-
+        $directory = $session->get('directory');
+        $files = $session->get('files');
         $tempDirectory = $session->get('tempDirectory');
-        $files = $session->get('POST:files');
+        $uploadedFiles = $session->get('uploadedFiles', []);
         $user = $session->get(UserInterface::class);
 
-        if (file_exists($tempDirectory) && is_dir($tempDirectory)) {
-            $uploadedFiles = [];
-            $skippedFiles = [];
+        if (is_null($tempDirectory) || !file_exists($tempDirectory) || !is_dir($tempDirectory)) {
+            $redirect = ($basePath !== '/' ? $basePath : '');
+            $redirect .= $this->router->generateUri('home');
 
+            return new RedirectResponse($redirect);
+        }
+
+        if (is_null($directory)) {
             if (!is_null($user)) {
                 $role = $user['roles'][0];
 
@@ -76,36 +72,48 @@ class SaveHandler implements RequestHandlerInterface
                 mkdir($directory, 0777, true);
             }
 
-            foreach ($files as $filename) {
-                if (file_exists($tempDirectory.'/'.$filename)) {
-                    $uploadedFiles[] = $filename;
-
-                    rename($tempDirectory.'/'.$filename, $directory.'/'.$filename);
-                }
-            }
-
-            $glob = glob($tempDirectory.'/*.*');
-            foreach ($glob as $file) {
-                $skippedFiles[] = basename($file);
-
-                unlink($file);
-            }
-            rmdir($tempDirectory);
-
-            $session->unset('POST:files');
-
-            $data = [
-                'directory' => substr($directory, 12),
-                'upload'    => $uploadedFiles,
-                'skip'      => $skippedFiles,
-            ];
-
-            return new HtmlResponse($this->template->render('app::save', $data));
-        } else {
-            $redirect = ($basePath !== '/' ? $basePath : '');
-            $redirect .= $this->router->generateUri('home');
-
-            return new RedirectResponse($redirect);
+            $session->set('directory', $directory);
         }
+
+        if ($i > 0 && isset($files[$i - 1])) {
+            $file = $files[$i - 1];
+            $filename = basename($file['path']);
+
+            copy($tempDirectory.'/'.$filename, $directory.'/'.$filename);
+
+            $uploadedFiles[] = $filename;
+
+            if (($i + 1) <= count($files)) {
+                $session->set('uploadedFiles', $uploadedFiles);
+
+                return new RedirectResponse($basePath.$this->router->generateUri('view', ['i' => $i + 1]));
+            }
+        }
+
+        $skippedFiles = [];
+        $glob = glob($tempDirectory.'/*.*');
+        foreach ($glob as $file) {
+            $filename = basename($file);
+
+            if (!in_array($filename, $uploadedFiles)) {
+                $skippedFiles[] = $filename;
+            }
+
+            unlink($file);
+        }
+        rmdir($tempDirectory);
+
+        $session->unset('directory');
+        $session->unset('files');
+        $session->unset('tempDirectory');
+        $session->unset('uploadedFiles');
+
+        $data = [
+            'directory' => substr($directory, 12),
+            'upload'    => $uploadedFiles,
+            'skip'      => $skippedFiles,
+        ];
+
+        return new HtmlResponse($this->template->render('app::save', $data));
     }
 }
