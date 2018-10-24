@@ -63,8 +63,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "@development-enable",
-            "npm install"
+            "@development-enable"
         ],
         "analyze": "phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config",
         "check": [
