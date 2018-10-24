@@ -86,7 +86,10 @@ class SaveHandler implements RequestHandlerInterface
             if (($i + 1) <= count($files)) {
                 $session->set('uploadedFiles', $uploadedFiles);
 
-                return new RedirectResponse($basePath.$this->router->generateUri('view', ['i' => $i + 1]));
+                $redirect = ($basePath !== '/' ? $basePath : '');
+                $redirect .= $this->router->generateUri('view', ['i' => $i + 1]);
+
+                return new RedirectResponse($redirect);
             }
         }
 
