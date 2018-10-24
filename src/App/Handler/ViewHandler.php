@@ -41,9 +41,16 @@ class ViewHandler implements RequestHandlerInterface
 
         $i = intval($request->getAttribute('i'));
         if ($i <= 0) {
-            return new RedirectResponse($basePath.$this->router->generateUri('view', ['i' => 1]), 301);
+            return new RedirectResponse(
+                $basePath !== '/' ? $basePath : ''
+                    .$this->router->generateUri('view', ['i' => 1]),
+                301
+            );
         } elseif ($i > count($files)) {
-            return new RedirectResponse($basePath.$this->router->generateUri('save'));
+            return new RedirectResponse(
+                $basePath !== '/' ? $basePath : ''
+                    .$basePath.$this->router->generateUri('save')
+            );
         }
 
         if (!isset($files[$i - 1])) {
