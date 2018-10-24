@@ -10,4 +10,8 @@
 
 ## Install
 
-    composer create-project geo6/upload-geojson
+```shell
+composer create-project geo6/upload-geojson
+```
+
+See [`INSTALL`](INSTALL.md) file for more details.
