@@ -14,7 +14,7 @@
     ],
     "license": "GPL-3.0-or-later",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "mtymek/blast-base-url": "1.0.0",
         "zendframework/zend-component-installer": "2.1.1",
         "zendframework/zend-config-aggregator": "1.1.1",
