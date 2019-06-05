@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1b921dcb85bf550b282b221addae5bd",
+    "content-hash": "3678ecfc1230c251e7e2e37368a3352b",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -624,16 +624,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.11.0",
+            "version": "v2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "c344879ae57dc1487b1df3e3d8325936125ba2cc"
+                "reference": "84a463403da1c81afbcedda8f0e788c78bd25a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c344879ae57dc1487b1df3e3d8325936125ba2cc",
-                "reference": "c344879ae57dc1487b1df3e3d8325936125ba2cc",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/84a463403da1c81afbcedda8f0e788c78bd25a79",
+                "reference": "84a463403da1c81afbcedda8f0e788c78bd25a79",
                 "shasum": ""
             },
             "require": {
@@ -644,7 +644,7 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
@@ -687,7 +687,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-05-31T06:21:42+00:00"
+            "time": "2019-06-05T11:17:07+00:00"
         },
         {
             "name": "zendframework/zend-component-installer",
@@ -1484,22 +1484,22 @@
         },
         {
             "name": "zendframework/zend-expressive-twigrenderer",
-            "version": "2.1.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-twigrenderer.git",
-                "reference": "9e54c7727b282c02bea7138850f4bfbd4649a2b4"
+                "reference": "b913efdb3155d74dcd7e1909bd4f03fbe2b578e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-twigrenderer/zipball/9e54c7727b282c02bea7138850f4bfbd4649a2b4",
-                "reference": "9e54c7727b282c02bea7138850f4bfbd4649a2b4",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-twigrenderer/zipball/b913efdb3155d74dcd7e1909bd4f03fbe2b578e3",
+                "reference": "b913efdb3155d74dcd7e1909bd4f03fbe2b578e3",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "psr/container": "^1.0",
-                "twig/twig": "^1.32 || ^2.1",
+                "twig/twig": "^1.34 | ^2.4",
                 "zendframework/zend-expressive-helpers": "^5.0",
                 "zendframework/zend-expressive-router": "^3.0",
                 "zendframework/zend-expressive-template": "^2.0"
@@ -1515,8 +1515,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev",
-                    "dev-develop": "2.2.x-dev"
+                    "dev-master": "2.3.x-dev",
+                    "dev-develop": "2.4.x-dev"
                 },
                 "zf": {
                     "config-provider": "Zend\\Expressive\\Twig\\ConfigProvider"
@@ -1543,7 +1543,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-04-09T20:47:56+00:00"
+            "time": "2019-01-23T17:35:01+00:00"
         },
         {
             "name": "zendframework/zend-httphandlerrunner",
