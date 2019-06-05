@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "leaflet": "^1.3.4",
+        "leaflet": "^1.5.1",
         "resumablejs": "^1.1.0"
     },
     "devDependencies": {
