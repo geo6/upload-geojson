@@ -1,29 +1,32 @@
 {
-    "dependencies": {
-        "leaflet": "^1.5.1",
-        "resumablejs": "^1.1.0"
-    },
-    "devDependencies": {
-        "acorn": "^6.1.1",
-        "eslint": "^5.16.0",
-        "eslint-config-standard": "^12.0.0",
-        "eslint-plugin-import": "^2.18.0",
-        "eslint-plugin-node": "^9.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.0",
-        "node-sass": "^4.12.0",
-        "webpack": "^4.35.2",
-        "webpack-cli": "^3.3.5"
-    },
-    "scripts": {
-        "postinstall": "npm run build",
-        "build": "npm run build:css && npm run build:js",
-        "build:css": "node-sass --output-style compressed --output public/css resources/sass/style.scss",
-        "build:js": "webpack --config webpack.config.js --mode production --progress",
-        "test": "eslint resources/javascript/",
-        "fix": "eslint resources/javascript/ --fix",
-        "watch": "npm run watch:css & npm run watch:js",
-        "watch:css": "node-sass --watch --output-style compressed --output public/css resources/sass/style.scss",
-        "watch:js": "webpack --watch --config webpack.config.js --mode development --progress"
-    }
+  "dependencies": {
+    "leaflet": "^1.5.1",
+    "resumablejs": "^1.1.0",
+    "snyk": "^1.193.0"
+  },
+  "devDependencies": {
+    "acorn": "^6.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "node-sass": "^4.12.0",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  },
+  "scripts": {
+    "prepublish": "npm run snyk-protect; npm run build",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "node-sass --output-style compressed --output public/css resources/sass/style.scss",
+    "build:js": "webpack --config webpack.config.js --mode production --progress",
+    "test": "eslint resources/javascript/",
+    "fix": "eslint resources/javascript/ --fix",
+    "watch": "npm run watch:css & npm run watch:js",
+    "watch:css": "node-sass --watch --output-style compressed --output public/css resources/sass/style.scss",
+    "watch:js": "webpack --watch --config webpack.config.js --mode development --progress",
+    "snyk-protect": "snyk protect"
+  },
+  "snyk": true
 }
