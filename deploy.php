@@ -25,8 +25,13 @@ add('writable_dirs', [
     'config',
     'data/cache',
     'data/temp',
+    'data/upload',
 ]);
+set('writable_mode', 'chown');
+set('writable_use_sudo', true);
+
 set('allow_anonymous_stats', false);
+set('cleanup_use_sudo', true);
 
 // Files/dirs to be deleted
 set('clear_paths', [
