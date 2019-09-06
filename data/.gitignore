@@ -3,4 +3,6 @@
 !cache/.gitkeep
 !temp
 !temp/.gitkeep
+!upload
+!upload/.gitkeep
 !.gitignore
