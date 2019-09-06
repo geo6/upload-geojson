@@ -24,6 +24,7 @@ add('shared_dirs', []);
 add('writable_dirs', [
     'config',
     'data/cache',
+    'data/temp',
 ]);
 set('allow_anonymous_stats', false);
 
