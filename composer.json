@@ -17,7 +17,7 @@
         "php": "^7.2",
         "mtymek/blast-base-url": "1.0.0",
         "zendframework/zend-component-installer": "2.1.2",
-        "zendframework/zend-config-aggregator": "1.1.1",
+        "zendframework/zend-config-aggregator": "1.2.0",
         "zendframework/zend-diactoros": "2.2.1",
         "zendframework/zend-expressive": "3.2.1",
         "zendframework/zend-expressive-authentication-session": "1.0.1",
