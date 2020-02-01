@@ -33,7 +33,7 @@ use Zend\Expressive\MiddlewareFactory;
  *     'contact'
  * );
  */
-return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $loadAuthenticationMiddleware = function ($middleware) use ($container) {
         if (isset($container->get('config')['authentication']['pdo'])) {
             return [
