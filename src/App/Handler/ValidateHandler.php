@@ -32,7 +32,7 @@ class ValidateHandler implements RequestHandlerInterface
         $this->containerName = $containerName;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
