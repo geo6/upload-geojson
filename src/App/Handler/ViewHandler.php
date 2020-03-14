@@ -32,7 +32,7 @@ class ViewHandler implements RequestHandlerInterface
         $this->containerName = $containerName;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $basePath = $request->getAttribute(BaseUrlMiddleware::BASE_PATH);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
