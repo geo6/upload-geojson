@@ -29,3 +29,4 @@ extras/documentation
 
 .vscode/
 hosts.yml
+.phpunit.result.cache
