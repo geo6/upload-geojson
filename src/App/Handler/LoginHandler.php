@@ -10,14 +10,14 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Authentication\UserInterface;
-use Zend\Expressive\Router;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template;
-use Zend\Log\Logger;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Router;
+use Mezzio\Router\RouteResult;
+use Mezzio\Session\SessionMiddleware;
+use Mezzio\Template;
+use Laminas\Log\Logger;
 
 class LoginHandler implements MiddlewareInterface
 {
