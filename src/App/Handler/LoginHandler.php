@@ -6,18 +6,18 @@ namespace App\Handler;
 
 // use App\Log;
 use Blast\BaseUrl\BaseUrlMiddleware;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Log\Logger;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Router;
 use Mezzio\Router\RouteResult;
 use Mezzio\Session\SessionMiddleware;
 use Mezzio\Template;
-use Laminas\Log\Logger;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class LoginHandler implements MiddlewareInterface
 {

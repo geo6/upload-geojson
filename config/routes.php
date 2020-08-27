@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Psr\Container\ContainerInterface;
 use Mezzio\Application;
 use Mezzio\Authentication\AuthenticationMiddleware;
 use Mezzio\MiddlewareFactory;
+use Psr\Container\ContainerInterface;
 
 /*
  * Setup routes with a single request method:

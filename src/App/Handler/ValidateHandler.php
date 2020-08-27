@@ -6,13 +6,13 @@ namespace App\Handler;
 
 use App\Validator\GeoJSON as GeoJSONValidator;
 use Exception;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Router;
 use Mezzio\Session\SessionMiddleware;
 use Mezzio\Template;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class ValidateHandler implements RequestHandlerInterface
 {
