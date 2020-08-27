@@ -10,7 +10,7 @@ export default function initView () {
             'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>.'
     }).addTo(map);
 
-    let options = {
+    const options = {
         pointToLayer: (feature, latlng) => {
             return L.circleMarker(latlng, {
                 radius: 5

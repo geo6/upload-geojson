@@ -17,7 +17,7 @@ export default function initUpload () {
  *
  */
 function initResumableJS () {
-    let resumable = new Resumable({
+    const resumable = new Resumable({
         fileType: ['geojson', 'json'],
         target: window.app.api,
         testChunks: true
