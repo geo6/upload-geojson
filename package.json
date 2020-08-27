@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "leaflet": "^1.6.0",
-    "resumablejs": "^1.1.0"
+    "leaflet": "1.6.0",
+    "resumablejs": "1.1.0"
   },
   "devDependencies": {
-    "acorn": "^7.4.0",
+    "acorn": "^8.0.1",
     "eslint": "^7.7.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "node-sass": "^4.14.1",
     "webpack": "^4.44.1",
