@@ -1,0 +1,13 @@
+# zend-expressive-skeleton specific
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+    fileExtensions:
+        # Standard php files and .dist config files
+        - php
+        - dist
+    reportUnmatchedIgnoredErrors: true
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#Short ternary operator is not allowed. Use null coalesce operator if applicable or consider using long ternary#'
