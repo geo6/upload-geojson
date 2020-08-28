@@ -3,7 +3,7 @@
 {% block title %}View{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="">
+<link rel="stylesheet" href="{{ asset('/view.css') }}">
 {% endblock %}
 
 {% block javascript %}
@@ -12,7 +12,7 @@
         geojson: {{ geojson | json_encode() | raw }}
     };
 </script>
-<script src="{{ asset('/js/view.min.js') }}"></script>
+<script src="{{ asset('/view.js') }}"></script>
 {% endblock %}
 
 {% block content %}
