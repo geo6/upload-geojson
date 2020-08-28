@@ -28,5 +28,6 @@ demos/
 extras/documentation
 
 .vscode/
+.cache/
 hosts.yml
 .phpunit.result.cache
