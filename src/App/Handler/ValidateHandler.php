@@ -40,7 +40,7 @@ class ValidateHandler implements RequestHandlerInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         $directory = $session->get('tempDirectory');
-        $glob = glob($directory . '/*.*');
+        $glob = glob($directory.'/*.*');
 
         $error = [];
         $warning = [];
@@ -68,7 +68,7 @@ class ValidateHandler implements RequestHandlerInterface
 
                     $json = json_decode((string) file_get_contents($file));
                     if (json_last_error() !== JSON_ERROR_NONE) {
-                        throw new Exception('Invalid JSON file : ' . json_last_error_msg());
+                        throw new Exception('Invalid JSON file : '.json_last_error_msg());
                     }
 
                     $validator = new GeoJSONValidator((string) file_get_contents($file));
@@ -99,7 +99,7 @@ class ValidateHandler implements RequestHandlerInterface
             }
         }
 
-        $glob = glob($directory . '/*.*');
+        $glob = glob($directory.'/*.*');
         if ($glob !== false && count($glob) === 0) {
             rmdir($directory);
         }
