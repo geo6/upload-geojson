@@ -7,24 +7,27 @@ namespace App\Handler;
 use Blast\BaseUrl\BaseUrlMiddleware;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Router;
+use Mezzio\Router\RouterInterface;
 use Mezzio\Session\SessionMiddleware;
-use Mezzio\Template;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class ViewHandler implements RequestHandlerInterface
 {
+    /** @var string */
     private $containerName;
 
+    /** @var RouterInterface */
     private $router;
 
+    /** @var TemplateRendererInterface */
     private $template;
 
     public function __construct(
-        Router\RouterInterface $router,
-        Template\TemplateRendererInterface $template = null,
+        RouterInterface $router,
+        TemplateRendererInterface $template,
         string $containerName
     ) {
         $this->router = $router;
@@ -59,13 +62,13 @@ class ViewHandler implements RequestHandlerInterface
             return new RedirectResponse($redirect);
         } else {
             $file = $files[$i - 1];
-            $json = json_decode(file_get_contents($file['path']));
+            $json = json_decode((string) file_get_contents($file['path']));
 
             $data = [
                 'count'         => count($files),
                 'current'       => $i,
                 'filename'      => basename($file['path']),
-                'filesize'      => round(filesize($file['path']) / 1024),
+                'filesize'      => round((float) filesize($file['path']) / 1024),
                 'featuresCount' => isset($json->features) ? count($json->features) : 1,
                 'geojson'       => $json,
                 'warnings'      => $file['warnings'],

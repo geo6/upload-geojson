@@ -8,24 +8,27 @@ use Blast\BaseUrl\BaseUrlMiddleware;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Authentication\UserInterface;
-use Mezzio\Router;
+use Mezzio\Router\RouterInterface;
 use Mezzio\Session\SessionMiddleware;
-use Mezzio\Template;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class SaveHandler implements RequestHandlerInterface
 {
+    /** @var string */
     private $containerName;
 
+    /** @var RouterInterface */
     private $router;
 
+    /** @var TemplateRendererInterface */
     private $template;
 
     public function __construct(
-        Router\RouterInterface $router,
-        Template\TemplateRendererInterface $template = null,
+        RouterInterface $router,
+        TemplateRendererInterface $template,
         string $containerName
     ) {
         $this->router = $router;
@@ -95,14 +98,16 @@ class SaveHandler implements RequestHandlerInterface
 
         $skippedFiles = [];
         $glob = glob($tempDirectory.'/*.*');
-        foreach ($glob as $file) {
-            $filename = basename($file);
+        if ($glob !== false) {
+            foreach ($glob as $file) {
+                $filename = basename($file);
 
-            if (!in_array($filename, $uploadedFiles)) {
-                $skippedFiles[] = $filename;
+                if (!in_array($filename, $uploadedFiles, true)) {
+                    $skippedFiles[] = $filename;
+                }
+
+                unlink($file);
             }
-
-            unlink($file);
         }
         rmdir($tempDirectory);
 

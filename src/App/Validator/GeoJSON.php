@@ -23,8 +23,13 @@ class GeoJSON
         'GeometryCollection',
     ];
 
+    /** @var string */
     private $content;
+
+    /** @var string[] */
     private $warnings = [];
+
+    /** @var string|null */
     private $error;
 
     public function __construct(string $content)
@@ -35,7 +40,7 @@ class GeoJSON
             $this->error = 'Invalid JSON file : '.json_last_error_msg();
         } else {
             try {
-                if (!isset($json->type) || !in_array($json->type, self::TYPES)) {
+                if (!isset($json->type) || !in_array($json->type, self::TYPES, true)) {
                     throw new Exception('Property "type" is missing or invalid.');
                 }
 
@@ -77,7 +82,7 @@ class GeoJSON
 
                 switch ($json->type) {
                     case 'Feature':
-                        $this->validateFeature($feature);
+                        $this->validateFeature($json);
                         break;
 
                     case 'FeatureCollection':
@@ -85,7 +90,7 @@ class GeoJSON
                             throw new Exception('Missing property "features".');
                         }
 
-                        if (empty($json->features)) {
+                        if (count($json->features) === 0) {
                             $this->warnings[] = '"FeatureCollection" is empty.';
                         } else {
                             foreach ($json->features as $feature) {
@@ -110,7 +115,7 @@ class GeoJSON
         return $this->warnings;
     }
 
-    public function getError(): string
+    public function getError(): ?string
     {
         return $this->error;
     }
@@ -147,7 +152,7 @@ class GeoJSON
         if (!isset($geometry->coordinates)) {
             throw new Exception('Missing property "coordinates" for at least one geometry.');
         }
-        if (!in_array($geometry->type, self::GEOMETRY_TYPES)) {
+        if (!in_array($geometry->type, self::GEOMETRY_TYPES, true)) {
             throw new Exception(sprintf('Invalid property "type" for at least one geometry : %s.', $geometry->type));
         }
 

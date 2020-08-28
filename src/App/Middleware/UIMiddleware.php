@@ -15,7 +15,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class UIMiddleware implements MiddlewareInterface
 {
+    /** @var RouterInterface */
     private $router;
+
+    /** @var TemplateRendererInterface */
     private $template;
 
     public function __construct(RouterInterface $router, TemplateRendererInterface $template)

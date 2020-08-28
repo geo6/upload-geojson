@@ -8,12 +8,12 @@ namespace App\Handler;
 use Blast\BaseUrl\BaseUrlMiddleware;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Laminas\Log\Logger;
+// use Laminas\Log\Logger;
 use Mezzio\Authentication\UserInterface;
-use Mezzio\Router;
+use Mezzio\Router\RouterInterface;
 use Mezzio\Router\RouteResult;
 use Mezzio\Session\SessionMiddleware;
-use Mezzio\Template;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -21,17 +21,21 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LoginHandler implements MiddlewareInterface
 {
+    /** @var bool */
     private $authentication;
 
+    /** @var string */
     private $containerName;
 
+    /** @var RouterInterface */
     private $router;
 
+    /** @var TemplateRendererInterface */
     private $template;
 
     public function __construct(
-        Router\RouterInterface $router,
-        Template\TemplateRendererInterface $template = null,
+        RouterInterface $router,
+        TemplateRendererInterface $template,
         string $containerName,
         bool $authentication
     ) {

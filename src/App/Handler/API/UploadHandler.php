@@ -22,7 +22,7 @@ class UploadHandler implements RequestHandlerInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         $params = array_merge(
-            $request->getParsedBody(),
+            (array) $request->getParsedBody(),
             $request->getQueryParams()
         );
 
@@ -46,7 +46,6 @@ class UploadHandler implements RequestHandlerInterface
                 } else {
                     return (new EmptyResponse())->withStatus(404);
                 }
-                break;
 
             case 'POST':
                 $files = $request->getUploadedFiles();
@@ -70,8 +69,10 @@ class UploadHandler implements RequestHandlerInterface
 
                         $uploadedSize = 0;
                         $listChunks = glob($tempDirectory.'/*.part.*');
-                        foreach ($listChunks as $uploadedChunk) {
-                            $uploadedSize += filesize($uploadedChunk);
+                        if ($listChunks !== false) {
+                            foreach ($listChunks as $uploadedChunk) {
+                                $uploadedSize += filesize($uploadedChunk);
+                            }
                         }
 
                         if ($uploadedSize >= $resumableTotalSize) {
@@ -84,7 +85,7 @@ class UploadHandler implements RequestHandlerInterface
                                     if (file_exists($uploadedChunk) && is_readable($uploadedChunk)) {
                                         $content = file_get_contents($uploadedChunk);
 
-                                        fwrite($handle, $content);
+                                        fwrite($handle, (string) $content);
 
                                         @unlink($uploadedChunk);
                                     } else {
@@ -100,7 +101,11 @@ class UploadHandler implements RequestHandlerInterface
                                 $new = $directory.'/'.$resumableFilename;
                                 $path = pathinfo($new);
                                 while (file_exists($new)) {
-                                    $new = $path['dirname'].'/'.$path['filename'].'.'.($i++).'.'.$path['extension'];
+                                    if (isset($path['extension'])) {
+                                        $new = $path['dirname'].'/'.$path['filename'].'.'.($i++).'.'.$path['extension'];
+                                    } else {
+                                        $new = $path['dirname'].'/'.$path['filename'].'.'.($i++);
+                                    }
                                 }
 
                                 $rename = rename(
@@ -131,7 +136,6 @@ class UploadHandler implements RequestHandlerInterface
 
                     return (new JsonResponse($data))->withStatus(500);
                 }
-                break;
         }
 
         return (new EmptyResponse())->withStatus(400);
