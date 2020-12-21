@@ -33,7 +33,7 @@ jobs:
         run: composer run-script test
 
   check-js:
-    name: Node.js ${{ matrix.php-version }}
+    name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
