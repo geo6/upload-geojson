@@ -7,7 +7,7 @@ on:
     branches: [master, develop]
 
 jobs:
-  check-php:
+  php:
     name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
     strategy:
@@ -32,7 +32,7 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
-  check-js:
+  js:
     name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
