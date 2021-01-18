@@ -19,7 +19,7 @@
         "laminas/laminas-config-aggregator": "1.4.0",
         "laminas/laminas-dependency-plugin": "2.1.0",
         "laminas/laminas-diactoros": "2.5.0",
-        "laminas/laminas-servicemanager": "3.6.1",
+        "laminas/laminas-servicemanager": "3.6.2",
         "laminas/laminas-stdlib": "3.3.1",
         "mezzio/mezzio": "3.2.2",
         "mezzio/mezzio-authentication-session": "1.0.1",
