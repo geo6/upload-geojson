@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fa7345f3c02f86bdf4b91c49f7aaf36",
+    "content-hash": "792314622200f8dde5e7edc4b343d9b3",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -618,16 +618,16 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.6.2",
+            "version": "3.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "69a33802574e34357da6937602622a8a8db69883"
+                "reference": "04a0118731d9f3ee865c7ceb5342551491adebc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/69a33802574e34357da6937602622a8a8db69883",
-                "reference": "69a33802574e34357da6937602622a8a8db69883",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/04a0118731d9f3ee865c7ceb5342551491adebc1",
+                "reference": "04a0118731d9f3ee865c7ceb5342551491adebc1",
                 "shasum": ""
             },
             "require": {
@@ -701,7 +701,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-17T17:08:19+00:00"
+            "time": "2021-01-25T00:14:52+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
