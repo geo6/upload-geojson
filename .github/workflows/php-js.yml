@@ -1,4 +1,4 @@
-name: Check
+name: CI
 
 on:
   push:
@@ -7,9 +7,11 @@ on:
     branches: [master, develop]
 
 jobs:
-  check-php:
+  php:
+    name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         php-version: ["7.4"]
     steps:
@@ -30,9 +32,11 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
-  check-js:
+  js:
+    name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [10.x, 12.x, 14.x]
     steps:
