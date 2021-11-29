@@ -28,11 +28,11 @@
     <div class="col-4">
         <div class="btn-toolbar justify-content-center">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{{ path('view', {i: current+1}) }}" class="btn btn-outline-secondary">
+                <a href="{{ basePath(path('view', {i: current+1})) }}" class="btn btn-outline-secondary">
                     <i class="far fa-times-circle"></i>
                     Skip
                 </a>
-                <a href="{{ path('save', {i: current}) }}" class="btn btn-{{ warnings | length > 0 ? 'warning' : 'success' }}">
+                <a href="{{ basePath(path('save', {i: current})) }}" class="btn btn-{{ warnings | length > 0 ? 'warning' : 'success' }}">
                     <i class="far fa-check-circle"></i>
                     Select
                 </a>

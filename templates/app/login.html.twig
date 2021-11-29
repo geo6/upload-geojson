@@ -15,7 +15,7 @@ Authentication
             {{ error }}
         </div>
         {% endif %}
-        <form action="{{ path('login') }}" method="POST">
+        <form action="{{ basePath(path('login')) }}" method="POST">
             <div class="form-group">
                 <label for="login-username">Username</label>
                 <input type="text" name="username" class="form-control" id="login-username" required="required">

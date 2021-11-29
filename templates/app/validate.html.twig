@@ -55,7 +55,7 @@
 
 {% if success | length > 0 or warning | length > 0 %}
 <div class="text-center mb-3">
-    <a href="{{ path('view') }}" class="btn btn-primary">
+    <a href="{{ basePath(path('view')) }}" class="btn btn-primary">
         Go to next step
         <i class="fas fa-arrow-circle-right"></i>
     </a>

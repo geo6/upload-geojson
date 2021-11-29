@@ -9,8 +9,8 @@
 {% block javascript %}
 <script src="{{ asset('/upload.js') }}"></script>
 <script>
-    window.app.api = "{{ path('api.upload') }}";
-    window.app.next = "{{ path('validate') }}";
+    window.app.api = "{{ basePath(path('api.upload')) }}";
+    window.app.next = "{{ basePath(path('validate')) }}";
 </script>
 {% endblock %}
 
