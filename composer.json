@@ -27,7 +27,7 @@
         "mezzio/mezzio-helpers": "5.7.0",
         "mezzio/mezzio-session-ext": "1.10.0",
         "mezzio/mezzio-twigrenderer": "2.6.1",
-        "mtymek/blast-base-url": "1.0.0"
+        "mtymek/blast-base-url": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "^2.1.12",
