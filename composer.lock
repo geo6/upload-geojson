@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6452f6593836a41ab8d363e142a28e38",
+    "content-hash": "edd889e39af1cd83a1c243af2f3720a3",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -851,16 +851,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "bf180a382393e7db5c1e8d0f2ec0c4af9c724baf"
+                "reference": "88bf037259869891afce6504cacc4f8a07b24d0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/bf180a382393e7db5c1e8d0f2ec0c4af9c724baf",
-                "reference": "bf180a382393e7db5c1e8d0f2ec0c4af9c724baf",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/88bf037259869891afce6504cacc4f8a07b24d0f",
+                "reference": "88bf037259869891afce6504cacc4f8a07b24d0f",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-03T17:53:30+00:00"
+            "time": "2021-12-21T14:34:37+00:00"
         },
         {
             "name": "mezzio/mezzio",
@@ -1106,32 +1106,31 @@
         },
         {
             "name": "mezzio/mezzio-authentication-session",
-            "version": "1.0.2",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-authentication-session.git",
-                "reference": "e113433f5238a5416e13f7c1c940693e4a241e71"
+                "reference": "0a6f2418571eec6564c9d8d5e0d21c84871035c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-authentication-session/zipball/e113433f5238a5416e13f7c1c940693e4a241e71",
-                "reference": "e113433f5238a5416e13f7c1c940693e4a241e71",
+                "url": "https://api.github.com/repos/mezzio/mezzio-authentication-session/zipball/0a6f2418571eec6564c9d8d5e0d21c84871035c8",
+                "reference": "0a6f2418571eec6564c9d8d5e0d21c84871035c8",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-authentication": "^1.0",
                 "mezzio/mezzio-session": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0 || ~8.1.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1"
             },
-            "replace": {
-                "zendframework/zend-expressive-authentication-session": "^1.0.1"
+            "conflict": {
+                "zendframework/zend-expressive-authentication-session": "*"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^7.0.1"
+                "laminas/laminas-coding-standard": "~2.2.0",
+                "phpunit/phpunit": "^9.3"
             },
             "type": "library",
             "extra": {
@@ -1170,7 +1169,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-21T17:17:48+00:00"
+            "time": "2021-09-14T04:02:34+00:00"
         },
         {
             "name": "mezzio/mezzio-fastroute",
